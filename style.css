@@ -1,103 +1,122 @@
-/* Pengaturan Dasar dan Tema Gelap */
+/* Pengaturan Dasar */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif; /* Menggunakan font Poppins */
-    color: #f0f0f0; /* Warna teks putih keabuan */
+    font-family: 'Poppins', sans-serif;
+    color: #f0f0f0;
+    background-color: #0f0c29; /* Warna background solid gelap */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-
-    /* --- ANIMASI LATAR BELAKANG --- */
-    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
-    background-size: 400% 400%;
-    animation: animated-gradient 15s ease infinite;
+    overflow: hidden; /* Mencegah scrollbar muncul karena animasi */
 }
 
-/* Keyframes untuk animasi gradasi pada background */
-@keyframes animated-gradient {
+/* === BAGIAN BARU: STYLING UNTUK LIVE WALLPAPER === */
+
+/* Wadah untuk partikel animasi */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Pastikan berada di belakang konten */
+}
+
+/* Setiap partikel (elemen span) */
+.background-animation span {
+    position: absolute;
+    bottom: -100px; /* Mulai dari bawah layar */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: move 20s linear infinite; /* Animasi bernama 'move' */
+}
+
+/* Keyframes untuk animasi bergerak dari bawah ke atas */
+@keyframes move {
     0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
+        transform: translateY(0) rotate(0deg);
     }
     100% {
-        background-position: 0% 50%;
+        transform: translateY(-120vh) rotate(360deg); /* Bergerak ke atas sejauh 120% tinggi layar dan berputar */
+        opacity: 0;
     }
 }
 
-/* Wadah Utama */
+/* Variasi ukuran, posisi, dan durasi untuk setiap partikel agar terlihat acak */
+.background-animation span:nth-child(1) {
+    width: 80px; height: 80px; left: 10%; animation-duration: 25s; animation-delay: -5s;
+}
+.background-animation span:nth-child(2) {
+    width: 40px; height: 40px; left: 20%; animation-duration: 15s; animation-delay: -10s;
+}
+.background-animation span:nth-child(3) {
+    width: 60px; height: 60px; left: 30%; animation-duration: 22s; animation-delay: -3s;
+}
+.background-animation span:nth-child(4) {
+    width: 20px; height: 20px; left: 45%; animation-duration: 18s; animation-delay: -1s;
+}
+.background-animation span:nth-child(5) {
+    width: 90px; height: 90px; left: 55%; animation-duration: 28s; animation-delay: -8s;
+}
+.background-animation span:nth-child(6) {
+    width: 30px; height: 30px; left: 70%; animation-duration: 12s; animation-delay: -15s;
+}
+.background-animation span:nth-child(7) {
+    width: 50px; height: 50px; left: 85%; animation-duration: 20s; animation-delay: 0s;
+}
+.background-animation span:nth-child(8) {
+    width: 25px; height: 25px; left: 5%; animation-duration: 14s; animation-delay: -12s;
+}
+.background-animation span:nth-child(9) {
+    width: 45px; height: 45px; left: 90%; animation-duration: 19s; animation-delay: -6s;
+}
+.background-animation span:nth-child(10) {
+    width: 70px; height: 70px; left: 40%; animation-duration: 24s; animation-delay: -2s;
+}
+
+/* ============================================= */
+
+
+/* Wadah Utama Konten (Sama seperti sebelumnya) */
 .container {
     width: 100%;
     max-width: 680px;
     text-align: center;
     padding: 30px;
-    background: rgba(0, 0, 0, 0.25); /* Latar belakang semi-transparan */
+    background: rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    backdrop-filter: blur(10px); /* Efek blur pada background container */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: relative; /* Ditambahkan agar berada di atas background-animation */
+    z-index: 1;
 }
 
-/* Foto Profil */
+/* Styling lain (profile-picture, username, link-button, dll) tetap sama */
 .profile-picture {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
-    border: 4px solid #ffffff;
-    margin-bottom: 15px;
-    object-fit: cover;
+    width: 120px; height: 120px; border-radius: 50%; border: 4px solid #ffffff; margin-bottom: 15px; object-fit: cover;
 }
-
 .username {
-    font-size: 1.8em;
-    margin: 0;
-    font-weight: 700;
+    font-size: 1.8em; margin: 0; font-weight: 700;
 }
-
 .description {
-    font-size: 1em;
-    margin-top: 5px;
-    margin-bottom: 30px;
-    color: #c0c0c0; /* Warna deskripsi sedikit lebih redup */
+    font-size: 1em; margin-top: 5px; margin-bottom: 30px; color: #c0c0c0;
 }
-
-/* Tombol Tautan */
 .link-button {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #f0f0f0;
-    padding: 18px 20px;
-    margin: 15px 0;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    /* --- ANIMASI SAAT DIKLIK/HOVER --- */
+    display: block; background-color: rgba(255, 255, 255, 0.1); color: #f0f0f0; padding: 18px 20px; margin: 15px 0; text-decoration: none; font-weight: bold; font-size: 1.1em; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.2s ease-out, background-color 0.2s ease-out;
 }
-
-/* Efek ketika kursor mouse di atas tombol */
 .link-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05); /* Sedikit membesar */
+    background-color: rgba(255, 255, 255, 0.2); transform: scale(1.05);
 }
-
-/* Efek ketika tombol sedang di-klik */
 .link-button:active {
-    transform: scale(0.98); /* Sedikit mengecil untuk efek 'ditekan' */
+    transform: scale(0.98);
 }
-
-/* Footer */
 .footer {
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #aaa;
+    margin-top: 40px; font-size: 0.9em; color: #aaa;
 }
