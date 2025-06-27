@@ -1,16 +1,14 @@
-/* --- Variabel & Pengaturan Dasar --- */
+/* Pengaturan Dasar */
 :root {
     --neon-pink: #ff00ff;
     --neon-cyan: #00d9ff;
-    --background-color: #05020d;
-    --text-light: #f0f0f0;
-    --text-muted: #c0c0c0;
+    --background-color: #05020d; /* Warna background jika video gagal dimuat */
 }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    color: var(--text-light);
+    color: #f0f0f0;
     background-color: var(--background-color);
     display: flex;
     justify-content: center;
@@ -21,7 +19,7 @@ body {
     overflow: hidden;
 }
 
-/* --- Latar Belakang Video --- */
+/* STYLING VIDEO LATAR BELAKANG */
 #background-video {
     position: fixed;
     top: 50%;
@@ -32,89 +30,88 @@ body {
     height: auto;
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
-    object-fit: cover;
-    filter: brightness(0.7);
+    object-fit: cover; /* Memastikan video menutupi seluruh layar */
+    filter: brightness(0.7); /* Sedikit meredupkan video agar teks lebih terbaca */
 }
 
-/* --- Wadah Konten & Animasi Masuk --- */
+/* Wadah Utama */
 .container {
     width: 100%;
     max-width: 720px;
     text-align: center;
     position: relative;
     z-index: 1;
-    /* Animasi fade-in saat halaman dimuat */
-    animation: content-fade-in 1.5s ease-out forwards;
 }
 
-@keyframes content-fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- Banner Utama --- */
+/* === BANNER UTAMA: NEON + GLITZ === */
 .main-banner {
     font-family: 'Poppins', sans-serif;
-    font-weight: 900;
-    font-size: 4rem;
+    font-weight: 900; /* Font paling tebal */
+    font-size: 4rem; /* Ukuran sangat besar */
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 20px;
     letter-spacing: 4px;
     position: relative;
-    animation: banner-pulse-sharp 4s ease-in-out infinite;
+    
+    /* Animasi denyut neon pada bayangan teks */
+    animation: banner-pulse 4s ease-in-out infinite;
 }
 
+/* EFEK GLITZ (Kilauan) menggunakan pseudo-element */
 .main-banner::before {
-    content: attr(data-text);
+    content: attr(data-text); /* Mengambil teks dari atribut data-text */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     color: transparent;
-    background-image: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-pink), var(--neon-cyan));
+    background-image: linear-gradient(90deg, 
+        var(--neon-pink), 
+        var(--neon-cyan), 
+        var(--neon-pink), 
+        var(--neon-cyan)
+    );
     background-size: 300% 100%;
-    -webkit-background-clip: text;
     background-clip: text;
+    -webkit-background-clip: text;
     animation: glitz-shine 6s linear infinite;
 }
 
-@keyframes banner-pulse-sharp {
+/* Keyframes untuk Animasi Banner */
+@keyframes banner-pulse {
     0%, 100% {
-        text-shadow: 0 0 2px #fff, 0 0 8px var(--neon-pink), 0 0 12px var(--neon-pink);
+        text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-pink), 0 0 15px var(--neon-pink);
     }
     50% {
-        text-shadow: 0 0 2px #fff, 0 0 12px var(--neon-cyan), 0 0 18px var(--neon-cyan);
+        text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-cyan), 0 0 30px var(--neon-cyan);
     }
 }
 
 @keyframes glitz-shine {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
-/* --- Deskripsi & Tombol Tautan --- */
+
+/* Deskripsi di bawah banner */
 .description {
     font-size: 1.1em;
     margin-bottom: 40px;
-    color: var(--text-muted);
-    text-shadow: 0 0 3px #000;
+    color: #c0c0c0;
+    text-shadow: 0 0 3px #000; /* Bayangan tipis agar mudah dibaca di atas video */
 }
 
+/* TOMBOL TAUTAN DENGAN GAYA NEON BARU */
 .link-button {
-    display: flex; /* Menggunakan flexbox untuk menata ikon dan teks */
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Jarak antara ikon dan teks */
+    display: block;
     background-color: rgba(0, 0, 0, 0.4);
-    color: var(--text-light);
+    color: #f0f0f0;
     border: 2px solid var(--neon-cyan);
     padding: 18px 20px;
     margin: 20px 0;
@@ -123,24 +120,20 @@ body {
     font-size: 1.1em;
     border-radius: 12px;
     transition: all 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+    box-shadow: 0 0 8px rgba(0, 217, 255, 0.5); /* Bayangan awal cyan */
 }
 
 .link-button:hover {
     color: #fff;
     border-color: var(--neon-pink);
-    box-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink), 0 0 25px var(--neon-pink); /* Glow pink saat disentuh */
     transform: scale(1.05) translateY(-2px);
 }
 
-.link-button i {
-    font-size: 1.2em; /* Ukuran ikon sedikit lebih besar dari teks */
-}
-
-/* --- Responsif --- */
+/* Responsif untuk layar kecil */
 @media (max-width: 600px) {
     .main-banner {
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* Ukuran banner lebih kecil di mobile */
         letter-spacing: 2px;
     }
     .description {
