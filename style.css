@@ -1,7 +1,20 @@
 /* Mengimpor jenis font dari Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-/* Definisi animasi fade-in */
+/* Definisi animasi untuk latar belakang gradasi */
+@keyframes animated-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Definisi animasi untuk kemunculan tombol */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -13,16 +26,20 @@
     }
 }
 
-
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #121212; /* Latar belakang gelap */
     color: #ffffff; /* Teks putih */
+    
+    /* Latar belakang gradasi yang bergerak */
+    background: linear-gradient(-45deg, #0d1117, #161b22, #0d1117, #21262d);
+    background-size: 400% 400%;
+    animation: animated-gradient 15s ease infinite;
+
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    padding: 20px 0;
 }
 
 .container {
@@ -30,11 +47,22 @@ body {
     padding: 20px;
 }
 
+/* Style untuk Banner */
+.banner h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    /* Efek bayangan untuk membuat teks bersinar */
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #007bff, 0 0 20px #007bff;
+    margin-bottom: 25px;
+}
+
 .profile-picture {
     width: 100px;
     height: 100px;
     border-radius: 50%; /* Membuat gambar menjadi bulat */
-    border: 3px solid #ffffff;
+    border: 3px solid #007bff; /* Warna border biru terang */
     margin-bottom: 20px;
 }
 
@@ -51,18 +79,19 @@ body {
 }
 
 .link-button {
-    background-color: #1f1f1f; /* Warna tombol sedikit lebih terang */
+    background-color: rgba(31, 31, 31, 0.7); /* Warna tombol semi-transparan */
+    backdrop-filter: blur(5px); /* Efek blur pada latar belakang tombol */
     color: #ffffff;
     text-decoration: none; /* Menghapus garis bawah pada link */
     padding: 15px 20px;
-    border-radius: 10px; /* Sudut tombol yang membulat */
-    border: 1px solid #333333;
+    border-radius: 10px;
+    border: 1px solid #444;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     min-width: 300px;
-    transition: transform 0.2s ease, background-color 0.2s ease; /* Transisi untuk animasi hover */
+    transition: transform 0.2s ease, background-color 0.2s ease;
 
     /* Menerapkan animasi fade-in */
     opacity: 0; /* Mulai dari transparan */
@@ -71,22 +100,22 @@ body {
 
 /* Efek saat kursor di atas tombol */
 .link-button:hover {
-    background-color: #333333;
+    background-color: rgba(0, 123, 255, 0.5); /* Warna biru saat hover */
+    border-color: #007bff;
     transform: scale(1.05); /* Sedikit memperbesar tombol */
 }
 
-/* Ikon di dalam tombol */
 .link-button i {
     font-size: 1.2em;
 }
 
 /* Jeda animasi untuk setiap tombol agar muncul satu per satu */
 .link-button:nth-child(1) {
-    animation-delay: 0.2s;
+    animation-delay: 0.5s;
 }
 .link-button:nth-child(2) {
-    animation-delay: 0.4s;
+    animation-delay: 0.7s;
 }
 .link-button:nth-child(3) {
-    animation-delay: 0.6s;
+    animation-delay: 0.9s;
 }
